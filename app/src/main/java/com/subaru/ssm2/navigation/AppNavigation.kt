@@ -4,7 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.subaru.ssm2.viewmodel.ConnectionViewModel
 import com.subaru.ssm2.ui.connection.ConnectionScreen
 import com.subaru.ssm2.ui.dashboard.DashboardScreen
 import com.subaru.ssm2.ui.livedata.LiveDataScreen
@@ -25,26 +26,14 @@ fun AppNavigation() {
 
         composable(Routes.Connection) {
 
+            val viewModel: ConnectionViewModel = viewModel()
+
             ConnectionScreen(
-
-                onSearchClick = {
-                    // позже Bluetooth Scan
-                },
-
+                viewModel = viewModel,
                 onConnectClick = {
-
-                    navController.navigate(Routes.Dashboard) {
-
-                        popUpTo(Routes.Connection) {
-                            inclusive = true
-                        }
-
-                    }
-
+                    navController.navigate(Routes.Dashboard)
                 }
-
             )
-
         }
 
         composable(Routes.Dashboard) {

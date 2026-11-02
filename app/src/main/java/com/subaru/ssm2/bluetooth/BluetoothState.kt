@@ -1,9 +1,16 @@
 package com.subaru.ssm2.bluetooth
 
-data class BluetoothState(
-    val enabled: Boolean = false,
-    val scanning: Boolean = false,
-    val connected: Boolean = false,
-    val devices: List<DeviceInfo> = emptyList(),
-    val selectedDevice: DeviceInfo? = null
-)
+sealed class BluetoothState {
+
+    object Idle : BluetoothState()
+
+    object Scanning : BluetoothState()
+
+    object Connecting : BluetoothState()
+
+    object Connected : BluetoothState()
+
+    data class Error(
+        val message: String
+    ) : BluetoothState()
+}
